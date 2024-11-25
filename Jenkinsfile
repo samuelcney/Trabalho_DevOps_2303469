@@ -12,6 +12,12 @@ pipeline {
                 sh 'ls -la'
             }
         }
+	stage('Install dependecies'){
+	     steps {
+	     	sh 'cd flask/'
+		sh 'pip install -r requirements.txt'
+             }
+	}
     }
 }
 

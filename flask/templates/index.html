@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Alunos</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gerenciamento de Alunos</h1>
+
+        <!-- Formulário para cadastrar aluno -->
+        <div class="form-container">
+            <h2>Cadastrar Aluno</h2>
+            <form id="alunoForm">
+                <input type="text" id="nome" placeholder="Nome" required>
+                <input type="text" id="ra" placeholder="RA" required>
+                <button type="submit">Cadastrar</button>
+            </form>
+            <div id="formMessage"></div>
+        </div>
+
+        <!-- Lista de alunos -->
+        <div class="list-container">
+            <h2>Lista de Alunos</h2>
+            <ul id="alunoList"></ul>
+        </div>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
+
