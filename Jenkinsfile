@@ -7,15 +7,9 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/samuelcney/Trabalho_DevOps_2303469.git'
             }
         }
-	stage('List files') {
-            steps {
-                sh 'ls -la'
-            }
-        }
-	stage('Install dependecies'){
+	stage('Build'){
 	     steps {
-	     	sh 'cd flask/'
-		sh 'pip install -r requirements.txt'
+	        sh 'docker-compose up --build'
              }
 	}
     }
