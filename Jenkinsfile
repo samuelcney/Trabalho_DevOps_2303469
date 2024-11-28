@@ -25,6 +25,7 @@ pipeline {
                 script {
                     echo 'Starting Docker containers...'
                     sh 'docker-compose up -d'
+                    sleep 10
                 }
             }
         }
@@ -33,7 +34,7 @@ pipeline {
             steps {
                 script {
                     echo 'Running tests...'
-                    sh 'docker-compose exec flask pytest /app/test_app.py'
+                    sh 'docker-compose exec flask pytest /app/test_py.py'
                 }
             }
         }
