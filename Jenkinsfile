@@ -4,7 +4,7 @@ pipeline {
         stage('Cloning repository') {
             steps {
 		echo 'Cloning repository...'
-                git branch: 'main', url: 'https://github.com/samuelcney/Trabalho_DevOps_2303469.git'
+                git branch: 'test/run-test-pipes', url: 'https://github.com/samuelcney/Trabalho_DevOps_2303469.git'
             }
         }
 
@@ -26,7 +26,8 @@ pipeline {
                     echo 'Starting Docker containers...'
                     sh 'docker-compose up -d'
                 }
-       }
+	    }
+        }
     }
 }
 
