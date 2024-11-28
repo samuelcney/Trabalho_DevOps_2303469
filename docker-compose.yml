@@ -2,7 +2,7 @@ services:
   flask:
     build:
       context: ./flask
-      dockerfile: Dockerfileflask
+      dockerfile: Dockerfile.flask
     ports:
       - "5000:5000"
     depends_on:
@@ -14,7 +14,7 @@ services:
   mariadb:
     build:
       context: ./mariadb
-      dockerfile: Dockerfilemariadb
+      dockerfile: Dockerfile.mariadb
     ports:
       - "3306:3307"
     environment:
