@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    
     stages {
         stage('Cloning repository') {
             steps {
@@ -30,15 +29,6 @@ pipeline {
             }
         }
 
-        stage('Wait for Flask') {
-            steps {
-                script {
-                    echo 'Waiting for Flask to start...'
-                    sh 'docker-compose exec flask /bin/sh -c "while ! nc -z localhost 5000; do sleep 1; done;"'
-                }
-            }
-        }
-
         stage('Run Tests') {
             steps {
                 script {
@@ -46,22 +36,6 @@ pipeline {
                     sh 'docker-compose exec flask pytest /app/test_py.py'
                 }
             }
-        }
-
-        stage('Deploy and Monitor') {
-            steps {
-                script {
-                    echo 'Ensuring monitoring is set up...'
-                    echo 'Application deployed and monitored successfully.'
-                }
-            }
-        }
-    }
-    
-    post {
-        always {
-            echo 'Cleaning up...'
-            sh 'docker-compose down -v'
         }
     }
 }
