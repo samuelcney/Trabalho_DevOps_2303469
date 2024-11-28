@@ -7,4 +7,4 @@ MarkupSafe==2.0.1  # Versão compatível com Jinja2 e Flask
 WTForms==2.3.3  # Versão compatível com Flask-AppBuilder que contém o módulo 'compat'
 prometheus-flask-exporter==0.18.3
 pytest==7.2.2  # Adicionando o pytest para executar testes
-
+requests==2.26.0
