@@ -8,8 +8,6 @@ class TestApp(unittest.TestCase):
         payload = {"ra": "12345", "name": "Student Test"}
         response = requests.post(f"{self.base_url}/students", json=payload)
 
-	print(response.json())
-
         self.assertEqual(response.status_code, 201)
 
         students = requests.get(f"{self.base_url}/students").json()
