@@ -5,8 +5,11 @@ class TestApp(unittest.TestCase):
     base_url = "http://localhost:5000"
 
     def test_register_student(self):
-        payload = {"ra": "12345", "name": "John Doe"}
-        response = requests.post(f"{self.base_url}/register", json=payload)
+        payload = {"ra": "12345", "name": "Student Test"}
+        response = requests.post(f"{self.base_url}/students", json=payload)
+
+	print(response.json())
+
         self.assertEqual(response.status_code, 201)
 
         students = requests.get(f"{self.base_url}/students").json()

@@ -4,37 +4,37 @@ from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
 
-# Configuração do banco de dados
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@mariadb/students_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 metrics = PrometheusMetrics(app)
 
-# Modelo de Aluno
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     ra = db.Column(db.String(10), nullable=False, unique=True)
     name = db.Column(db.String(100), nullable=False)
 
-# Inicialização do banco de dados
 @app.before_first_request
 def init_db():
     db.create_all()
 
-@app.route('/register', methods=['POST'])
+@app.route('/students', methods=['POST'])
 def register_student():
-    data = request.get_json()
-    ra = data.get('ra')
-    name = data.get('name')
-    if not ra or not name:
-        return jsonify({"error": "RA and name are required"}), 400
+    try:
+        data = request.get_json()
+        ra = data.get('ra')
+        name = data.get('name')
+        if not ra or not name:
+            return jsonify({"error": "RA and name are required"}), 400
 
-    student = Student(ra=ra, name=name)
-    db.session.add(student)
-    db.session.commit()
+        student = Student(ra=ra, name=name)
+        db.session.add(student)
+        db.session.commit()
 
-    return jsonify({"message": "Student registered successfully"}), 201
+        return jsonify({"message": "Student registered successfully"}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/students', methods=['GET'])
 def list_students():
