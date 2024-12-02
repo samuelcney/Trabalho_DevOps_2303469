@@ -10,12 +10,6 @@ COPY prometheus.yml /etc/prometheus/prometheus.yml
 # Garantir que o diretório de configuração tem as permissões corretas
 RUN chown -R prometheus:prometheus /etc/prometheus
 
-# Garantir que o Prometheus tenha permissão para acessar e executar
-RUN chmod -R 777 /etc/prometheus
-
-# Voltar para o usuário prometheus por questões de segurança
-USER prometheus
-
 # Comando para iniciar o Prometheus
 CMD [ "--config.file=/etc/prometheus/prometheus.yml" ]
 
