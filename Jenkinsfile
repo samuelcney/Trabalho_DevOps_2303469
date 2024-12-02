@@ -8,14 +8,6 @@ pipeline {
             }
         }
 
-	stage('Preparing'){
-	   steps {
-		script {
-		    sh 'sudo chmod -R 777 /var/lib/jenkins/workspace/Trabalho-DevOps-2303469/prometheus'
-		}
-	     }
-	}
-
         stage('Build') {
             steps {
                 script {
