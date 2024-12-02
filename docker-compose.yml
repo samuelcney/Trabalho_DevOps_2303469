@@ -28,7 +28,7 @@ services:
       context: ./prometheus
       dockerfile: Dockerfile.prometheus
     volumes:
-      - /var/lib/jenkins/workspace/Trabalho-DevOps-2303469/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
     depends_on:
