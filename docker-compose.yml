@@ -22,10 +22,8 @@ services:
       MYSQL_DATABASE: students_db
     volumes:
       - mariadb-data:/var/lib/mysql
-volumes:
-  mariadb-data:
 
-prometheus:
+  prometheus:
     image: prom/prometheus
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -57,3 +55,5 @@ prometheus:
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/var/lib/grafana/dashboards
 
+volumes:
+  mariadb-data:
