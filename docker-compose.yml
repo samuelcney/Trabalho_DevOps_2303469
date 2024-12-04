@@ -2,7 +2,7 @@ services:
   flask:
     build:
       context: ./flask
-      dockerfile: Dockerfile_flask
+      dockerfile: Dockerfile.flask
     ports:
       - "5000:5000"
     environment:
@@ -13,7 +13,7 @@ services:
   mariadb:
     build:
       context: ./mariadb
-      dockerfile: Dockerfile_mariadb
+      dockerfile: Dockerfile.mariadb
     ports:
       - "3307:3306"
     environment:
@@ -45,7 +45,7 @@ services:
   grafana:
     build:
       context: ./grafana
-      dockerfile: Dockerfile_grafana
+      dockerfile: Dockerfile.grafana
     ports:
       - "3000:3000"
     depends_on:
@@ -54,7 +54,7 @@ services:
   test:
     build:
       context: ./flask
-      dockerfile: Dockerfile_flask
+      dockerfile: Dockerfile.flask
     command: ["pytest", "/app/test_app.py"]
     depends_on:
       - mariadb
