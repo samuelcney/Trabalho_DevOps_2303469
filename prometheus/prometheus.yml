@@ -6,8 +6,11 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']  # Definição do alvo, neste caso o próprio Prometheus
 
+  - job_name: 'flask'  # Nome do job para a aplicação Flask
+    static_configs:
+      - targets: ['flask:5000']  # Definição do alvo para a aplicação Flask
+
   - job_name: 'mysqld_exporter'  # Nome do job para o MySQL Exporter
     static_configs:
-      - targets: ['mysqld_exporter:9104']  # Definição do alvo para coletar métricas do MySQL Exporter
-
+      - targets: ['mariadb_exporter:9104']  # Definição do alvo para coletar métricas do MySQL Exporter
 

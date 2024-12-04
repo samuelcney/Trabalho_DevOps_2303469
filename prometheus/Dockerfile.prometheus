@@ -1,0 +1,16 @@
+# Usar a imagem oficial do Prometheus
+FROM prom/prometheus:latest
+
+# Trocar para o usuário root para poder manipular permissões e arquivos
+USER root
+
+# Copiar o arquivo de configuração para o diretório correto no contêiner
+COPY prometheus.yml /etc/prometheus/prometheus.yml
+
+# Garantir que o diretório de configuração tem as permissões corretas
+# Usando root para evitar problemas de permissões
+RUN chown -R root:root /etc/prometheus
+
+# Comando para iniciar o Prometheus
+CMD [ "--config.file=/etc/prometheus/prometheus.yml" ]
+
