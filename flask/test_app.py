@@ -1,18 +1,31 @@
-import unittest
-import requests
+import pytest
+from flask import Flask
+from flask.testing import FlaskClient
 
-class TestApp(unittest.TestCase):
-    base_url = "http://localhost:5000"
+# Importar a aplicação Flask
+from app import app  # Assumindo que seu arquivo principal é app.py
 
-    def test_register_student(self):
-        payload = {"ra": "12345", "name": "Student Test"}
-        response = requests.post(f"{self.base_url}/students", json=payload)
+@pytest.fixture
+def client():
+    with app.test_client() as client:
+        yield client
 
-        self.assertEqual(response.status_code, 201)
+def test_listar_alunos(client: FlaskClient):
+    """Testa a rota GET /alunos"""
+    response = client.get('/alunos')
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
 
-        students = requests.get(f"{self.base_url}/students").json()
-        self.assertTrue(any(student["ra"] == "12345" for student in students))
-
-if __name__ == "__main__":
-    unittest.main()
-
+def test_adicionar_aluno(client: FlaskClient):
+    """Testa a rota POST /alunos"""
+    new_aluno = {
+        "nome": "Lal",
+        "sobrenome": "de Lal",
+        "turma": "2 periodo",
+        "disciplinas": "Alemão",
+        "ra": "2007"
+    }
+    response = client.post('/alunos', json=new_aluno)
+    assert response.status_code == 201
+    assert response.json['message'] == 'Aluno adicionado com sucesso!'
+    
