@@ -1,10 +1,15 @@
 pipeline {
     agent any
+
+    environment {
+        REPOSITORY_URL = 'https://github.com/samuelcney/Trabalho_DevOps_2303469.git'
+        BRANCH_NAME = 'test/run-test-pipes'
+    }
+
     stages {
         stage('Cloning repository') {
             steps {
-                echo 'Cloning repository...'
-                git branch: 'test/run-test-pipes', url: 'https://github.com/samuelcney/Trabalho_DevOps_2303469.git'
+                git branch: "${BRANCH_NAME}", url: "${REPOSITORY_URL}"
             }
         }
 
@@ -20,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Start Containers') {
+	stage('Start Containers') {
             steps {
                 script {
                     echo 'Starting Docker containers...'
@@ -28,16 +33,25 @@ pipeline {
                     sleep 10
                 }
             }
-        }
+        } 
 
         stage('Run Tests') {
             steps {
                 script {
                     echo 'Running tests...'
-                    sh 'docker-compose exec flask pytest /app/test_app.py'
+                    sh 'sleep 20'
+                    sh 'docker-compose run --rm test'
                 }
             }
         }
     }
-}
 
+    post {
+        success {
+            echo 'Pipeline executed successfully'
+        }
+        failure {
+            echo 'The pipeline fails to execute'
+        }
+    }
+}

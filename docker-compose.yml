@@ -5,11 +5,10 @@ services:
       dockerfile: Dockerfile.flask
     ports:
       - "5000:5000"
+    environment:
+      - FLASK_ENV=development
     depends_on:
       - mariadb
-    environment:
-      FLASK_ENV: development
-      SQLALCHEMY_DATABASE_URI: mysql+pymysql://root:password@mariadb/students_db
 
   mariadb:
     build:
@@ -18,15 +17,13 @@ services:
     ports:
       - "3307:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: students_db
-    volumes:
-      - mariadb-data:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: school_db
+      MYSQL_USER: flask_user
+      MYSQL_PASSWORD: flask_password
 
   prometheus:
-    build:
-      context: ./prometheus
-      dockerfile: Dockerfile.prometheus
+    image: prom/prometheus
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
@@ -48,15 +45,21 @@ services:
   grafana:
     build:
       context: ./grafana
-      dockerfile: Dockerfile_grafana
+      dockerfile: Dockerfile.grafana
     ports:
       - "3000:3000"
     depends_on:
       - prometheus
-    volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - ./grafana/dashboards:/var/lib/grafana/dashboards
 
-volumes:
-  mariadb-data:
-
+  test:
+    build:
+      context: ./flask
+      dockerfile: Dockerfile.flask
+    command: ["pytest", "/app/test_app.py"]
+    depends_on:
+      - mariadb
+      - flask
+    environment:
+      - DATABASE_URL=mysql+pymysql://flask_user:flask_password@mariadb:3306/school_db
+    networks:
+      - default
