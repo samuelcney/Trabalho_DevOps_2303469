@@ -2,10 +2,10 @@ FROM grafana/grafana:latest
 
 USER root
 
-# Certifique-se de que o diretório `provisioning/dashboards` existe antes de copiá-lo
+# Criar os diretórios necessários
 RUN mkdir -p /etc/grafana/provisioning/dashboards /etc/grafana/provisioning/datasources
 
-# Copiar os arquivos para o diretório correto
+# Copiar os arquivos para os diretórios corretos
 COPY provisioning/datasource.yml /etc/grafana/provisioning/datasources/
 COPY provisioning/dashboard.yml /etc/grafana/provisioning/dashboards/
 COPY dashboards/mariadb_dashboard.json /etc/grafana/provisioning/dashboards/

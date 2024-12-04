@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     echo 'Stopping and removing existing containers...'
-                    sh 'docker-compose down -v'
+                    sh 'docker-compose down'
 
                     echo 'Building Docker images...'
                     sh 'docker-compose build'
@@ -40,7 +40,7 @@ pipeline {
                 script {
                     echo 'Running tests...'
                     sh 'sleep 20'
-                    sh 'docker-compose run --rm test'
+                    sh 'docker-compose run --abort-on-container-exit test'
                 }
             }
         }
