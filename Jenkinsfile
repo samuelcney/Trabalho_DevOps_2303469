@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         REPOSITORY_URL = 'https://github.com/samuelcney/Trabalho_DevOps_2303469.git'
-        BRANCH_NAME = 'test/run-test-pipes'
+        BRANCH_NAME = 'main'
     }
 
     stages {
