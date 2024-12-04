@@ -34,7 +34,7 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yml"
 
   mysqld_exporter:
-    image: prom/mysqld-exporter
+    image: prom/mysqld_exporter
     ports:
       - "9104:9104"
     environment:
