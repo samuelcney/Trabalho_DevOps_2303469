@@ -3,7 +3,7 @@ from flask import Flask
 from flask.testing import FlaskClient
 
 # Importar a aplicação Flask
-from app import app  # Assumindo que seu arquivo principal é app.py
+from app import app
 
 @pytest.fixture
 def client():
@@ -19,11 +19,11 @@ def test_listar_alunos(client: FlaskClient):
 def test_adicionar_aluno(client: FlaskClient):
     """Testa a rota POST /alunos"""
     new_aluno = {
-        "nome": "Lal",
-        "sobrenome": "de Lal",
-        "turma": "2 periodo",
-        "disciplinas": "Alemão",
-        "ra": "2007"
+        "nome": "Relampago",
+        "sobrenome": "Marquinhos",
+        "turma": "8 periodo",
+        "disciplinas": "Copa pistão",
+        "ra": "101010"
     }
     response = client.post('/alunos', json=new_aluno)
     assert response.status_code == 201

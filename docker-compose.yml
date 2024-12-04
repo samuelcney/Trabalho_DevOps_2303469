@@ -34,11 +34,11 @@ services:
       - "--config.file=/etc/prometheus/prometheus.yml"
 
   mysqld_exporter:
-    image: prom/mysqld_exporter
+    image: prom/mysqld-exporter
     ports:
       - "9104:9104"
     environment:
-      DATA_SOURCE_NAME: "user:password@(mariadb:3306)/"
+      DATA_SOURCE_NAME: "flask_user:flask_password@(mariadb:3306)/"
     depends_on:
       - mariadb
 
