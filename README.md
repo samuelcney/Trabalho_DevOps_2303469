@@ -570,21 +570,12 @@ services:
     networks:
       - default
 ````
-
-## **Iniciando o Projeto**
-
-1. **Comando para rodar o projeto**  
-   Para iniciar os serviços, execute:  
-   ```bash
-   docker-compose up --build
-   ```  
-   Caso algum erro ocorra ou não puxe todos os dados, tente novamente o comando acima.
 ---
 ## **Passo a Passo de Execução e Resultados**
 Abaixo estão as imagens que ilustram os resultados do projeto em execução:
 
 - **Jenkins**  
-Acesse o endereço: `http://localhost:8080`.  
+Acesse a URL: `http://localhost:8080`.  
 
 1. **Faça login no Jenkins** com suas credenciais.  
 
@@ -609,7 +600,8 @@ Acesse o endereço: `http://localhost:8080`.
 5. **Configurar o Repositório Git**:  
    - No campo **SCM**, escolha **"Git"**.  
    - Informe o endereço do repositório do projeto:  
-     `https://github.com/samuelcney/trabalho-devops-2303469`.  
+     `https://github.com/samuelcney/trabalho-devops-2303469`.
+   - Informe a branch na qual irá acessar os dados. 
 
 6. **Salvar as Alterações**:  
    - Clique em **Salvar** para finalizar a configuração.  
@@ -624,7 +616,7 @@ Acesse o endereço: `http://localhost:8080`.
    ![Imagem Jenkins](imagens/jenkins4.JPG)
 
 - **Grafana**:
-Acesse o link: `http://localhost:3000`
+Acesse a URL: `http://localhost:3000`
 
 Faça login no Grafana:
 
@@ -637,10 +629,10 @@ Verifique a dashboard provisionado automaticamente e visualize as métricas de r
 
 - **Flask**
 
-Acesse o link: ` http://localhost:5000 `
+Acesse a URL: ` http://localhost:5000 `
 ![Imagem da Aplicação Flask funcionando](imagens/flask1.JPG)
 
-- Clice em Alunos, assim podera visualizar os alunos criados pelo teste
+- Clique em Alunos, assim podendo visualizar os registros criados pelos testes
 ![Imagem da Aplicação Flask funcionando](imagens/flask2.JPG)
 
 ---
