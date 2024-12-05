@@ -28,8 +28,7 @@ O objetivo deste projeto é desenvolver um fluxo completo de CI/CD, que possibil
   - Commits frequentes documentam o progresso do projeto.
 
 - **Diretórios Principais**:
-  - `app/`: Código-fonte da aplicação Flask.
-  - `tests/`: Arquivo com testes unitários para validar a funcionalidade de cadastro de aluno.
+  - `app/`: Código-fonte da aplicação Flask e arquivo com testes unitários para validar a funcionalidade de cadastro de aluno..
   - `prometheus/`: Configurações para coleta de métricas no Prometheus.
   - `grafana/`: Configurações de datasources e dashboards para visualização das métricas no Grafana.
 
