@@ -4,6 +4,7 @@ pipeline {
     environment {
         REPOSITORY_URL = 'https://github.com/samuelcney/Trabalho_DevOps_2303469.git'
         BRANCH_NAME = 'main'
+        CONTAINERS = 'mariadb flask test mysqld_exporter prometheus grafana'
     }
 
     stages {
@@ -13,10 +14,10 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build containers') {
             steps {
                 script {
-                    echo 'Stopping and removing existing containers...'
+                    echo 'Stopping existing containers...'
                     sh 'docker-compose down'
 
                     echo 'Building Docker images...'
@@ -25,22 +26,26 @@ pipeline {
             }
         }
 
-	stage('Start Containers') {
+        stage('Start Containers') {
             steps {
                 script {
                     echo 'Starting Docker containers...'
-                    sh 'docker-compose up -d'
-                    sleep 10
+                    sh "docker-compose up -d ${CONTAINERS}"
+                    sleep 40
                 }
             }
-        } 
+        }
 
         stage('Run Tests') {
             steps {
                 script {
-                    echo 'Running tests...'
-                    sh 'sleep 20'
-                    sh 'docker-compose run --abort-on-container-exit test'
+                    try {
+                        echo 'Running tests...'
+                        sh 'docker-compose run --rm test'
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        error 'Pipeline process stopped because tests failed'
+                    }
                 }
             }
         }
@@ -52,6 +57,8 @@ pipeline {
         }
         failure {
             echo 'The pipeline fails to execute'
+            sh 'docker-compose down'
         }
     }
 }
+

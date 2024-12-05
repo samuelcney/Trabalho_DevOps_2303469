@@ -7,7 +7,6 @@ from flask_appbuilder.models.sqla.interface import SQLAInterface
 from flask_appbuilder import ModelView
 from sqlalchemy.exc import OperationalError
 from prometheus_flask_exporter import PrometheusMetrics
-from prometheus_client import generate_latest, REGISTRY
 import logging
 
 app = Flask(__name__)
@@ -17,7 +16,7 @@ metrics = PrometheusMetrics(app)
 app.config['SECRET_KEY'] = 'minha_chave_secreta_super_secreta'  # Substitua por uma chave segura
 
 # Configuração do banco de dados
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://flask_user:flask_password@mariadb/school_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root_password@mariadb/school_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializar o banco de dados e o AppBuilder
@@ -93,11 +92,6 @@ def adicionar_aluno():
     db.session.commit()
     logger.info(f"Aluno {data['nome']} {data['sobrenome']} adicionado com sucesso!")
     return jsonify({'message': 'Aluno adicionado com sucesso!'}), 201
-
-@app.route('/metrics')
-def metrics_route():
-    # Retorna as métricas em formato Prometheus
-    return generate_latest(REGISTRY)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

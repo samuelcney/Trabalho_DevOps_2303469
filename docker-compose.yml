@@ -2,7 +2,7 @@ services:
   flask:
     build:
       context: ./flask
-      dockerfile: Dockerfile.flask
+      dockerfile: Dockerfile_flask
     ports:
       - "5000:5000"
     environment:
@@ -13,7 +13,7 @@ services:
   mariadb:
     build:
       context: ./mariadb
-      dockerfile: Dockerfile.mariadb
+      dockerfile: Dockerfile_mariadb
     ports:
       - "3307:3306"
     environment:
@@ -38,28 +38,23 @@ services:
     ports:
       - "9104:9104"
     environment:
-      DATA_SOURCE_NAME: "flask_user:flask_password@(mariadb:3306)/"
+      DATA_SOURCE_NAME: "user:password@(mariadb:3306)/"
     depends_on:
       - mariadb
 
   grafana:
     build:
       context: ./grafana
-      dockerfile: Dockerfile.grafana
+      dockerfile: Dockerfile_grafana
     ports:
       - "3000:3000"
     depends_on:
       - prometheus
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin_password
-    volumes:
-      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
 
   test:
     build:
       context: ./flask
-      dockerfile: Dockerfile.flask
+      dockerfile: Dockerfile_flask
     command: ["pytest", "/app/test_app.py"]
     depends_on:
       - mariadb
