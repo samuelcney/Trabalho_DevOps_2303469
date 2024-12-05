@@ -56,6 +56,7 @@ A pipeline do Jenkins é configurada para realizar as seguintes etapas:
 ├── Jenkinsfile                          # Define a pipeline de CI/CD do Jenkins
 ├── docker-compose.yml
 ├── grafana/
+│   ├── Dockerfile_grafana
 │   ├── provisioning/
 │   │   ├── datasource.yml          # Configuração de fonte de dados para o Grafana
 │   │   ├── dashboard.yml           # Configuração para provisionamento automático de dashboards
