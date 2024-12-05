@@ -31,7 +31,7 @@ pipeline {
                 script {
                     echo 'Starting Docker containers...'
                     sh "docker-compose up -d ${CONTAINERS}"
-                    sleep 40
+                    sleep 25
                 }
             }
         }
