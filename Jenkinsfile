@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REPOSITORY_URL = 'https://github.com/samuelcney/Trabalho_DevOps_2303469.git'
+        REPOSITORY_URL = 'https://github.com/samuelcney/trabalho-devops-2303469.git'
         BRANCH_NAME = 'main'
         CONTAINERS = 'mariadb flask test mysqld_exporter prometheus grafana'
     }
